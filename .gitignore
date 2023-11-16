@@ -23,9 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-./design/*
+design
 style-guide.md
 README-template.md
 
-./src/App-vite.css
-./src/index-vite.css
+src/App-vite.css
+src/index-vite.css
