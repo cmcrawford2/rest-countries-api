@@ -2,8 +2,49 @@
   box-sizing: border-box;
 }
 
+:root {
+  --element-background-color: hsl(0, 0%, 100%);
+  --primary-background-color: hsl(0, 0%, 98%);
+  --text-color: hsl(200, 15%, 8%);
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text-color);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  background-color: var(--element-background-color);
+  align-items: center;
+  padding: 0 70px;
+}
+
+nav h2 {
+  font-size: 18px;
+}
+
+nav i,
+p {
+  display: inline-block;
+  vertical-align: middle;
+}
+nav p {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+main {
+  background-color: var(--primary-background-color);
+}
+
+#search-filter-wrapper {
+  display: flex;
+  justify-content: space-around;
 }
