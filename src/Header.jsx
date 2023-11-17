@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function Header() {
   const [theme, setTheme] = useState("light");
+
   function toggleTheme() {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
