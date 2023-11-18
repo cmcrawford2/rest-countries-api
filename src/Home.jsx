@@ -1,3 +1,5 @@
+import Countries from "./Countries";
+
 export default function Home() {
   return (
     <main>
@@ -8,7 +10,7 @@ export default function Home() {
           placeholder="Search for a country..."
         />
       </div>
-      <h1>Home page</h1>
+      <Countries />
     </main>
   );
 }

@@ -48,3 +48,44 @@ main {
   display: flex;
   justify-content: space-around;
 }
+
+#countries-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 70px;
+  max-width: 1400;
+  flex-wrap: wrap;
+
+  /* overflow-x: auto; */
+}
+
+#country {
+  flex: 0 0 auto;
+  max-width: 200px;
+  background-color: var(--element-background-color);
+  padding-bottom: 30px;
+  margin-bottom: 60px;
+}
+
+#country img {
+  width: 100%;
+  height: 55%;
+  object-fit: fill;
+}
+
+#country h2 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-left: 16px;
+}
+
+#country p {
+  font-size: 11px;
+  display: block;
+  line-height: 17px;
+  margin: 0 0 0 16px;
+}
+
+#country span {
+  font-weight: 600;
+}
