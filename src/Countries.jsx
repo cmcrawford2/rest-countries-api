@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useCountries } from "./CountriesContext";
 import { getCountries } from "../api.js";
 
 export default function Countries() {
-  const [countries, setCountries] = useState([]);
+  const { countries, setCountries } = useCountries();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +18,7 @@ export default function Countries() {
     };
 
     fetchData(); // Call the function to fetch data when the component mounts
-  }, []); // Empty dependency array to run once on mount
+  }, [setCountries]); // Empty dependency array to run once on mount
 
   console.log(countries);
 

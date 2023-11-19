@@ -1,96 +1,93 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useParams } from "react-router-dom";
-import { getCountry } from "../api";
+import { useCountries } from "./CountriesContext";
 
 export default function CountryDetail() {
-  const [country, setCountry] = useState({});
+  const { countries } = useCountries();
+  if (countries.length === 0) {
+    // We haven't loaded the countries yet.
+    return;
+  }
 
   const params = useParams();
-  console.log(params);
-
   const countryCode = params.id;
-  console.log(countryCode);
 
-  useEffect(() => {
-    const fetchCountry = async () => {
-      try {
-        const countryData = await getCountry(countryCode);
-        setCountry(countryData); // Update state with fetched data
-      } catch (error) {
-        // Handle errors if needed
-        console.error("Error fetching country:", error);
-      }
-    };
+  const currentCountry = countries.find(
+    (thisCountry) => thisCountry.cca3 === countryCode
+  );
+  console.log("Current Country = ", currentCountry);
 
-    fetchCountry();
-  }, [countryCode]);
+  // Get the list of Native Names
+  const nativeNameObjects = Object.values(currentCountry.name.nativeName);
+  const nativeNames = nativeNameObjects
+    .map((nameObject) => nameObject.common)
+    .filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    })
+    .join(", ");
 
-  let nativeNames = "";
-  let currencyNames = "";
-  let languageNames = "";
+  // Get the list of currencies
+  const currencies = Object.values(currentCountry.currencies);
+  const currencyNames = currencies.map((currency) => currency.name).join(", ");
+
+  // Get the list of languages
+  const languages = Object.values(currentCountry.languages);
+  const languageNames = languages.join(", ");
+
+  // Set up buttons for bordering countries
   let borderButtons = [];
-
-  if (Array.isArray(country) && country.length > 0) {
-    // Get the list of Native Names
-    const nativeNameObjects = Object.values(country[0].name.nativeName);
-    nativeNames = nativeNameObjects
-      .map((nameObject) => nameObject.common)
-      .filter((value, index, self) => {
-        return self.indexOf(value) === index;
-      })
-      .join(", ");
-
-    // Get the list of currencies
-    const currencies = Object.values(country[0].currencies);
-    currencyNames = currencies.map((currency) => currency.name).join(", ");
-
-    // Get the list of languages
-    const languages = Object.values(country[0].languages);
-    languageNames = languages.join(", ");
+  if (currentCountry.borders && currentCountry.borders.length > 0) {
+    borderButtons = currentCountry.borders.map((border, index) => {
+      console.log(border);
+      const borderCountry = countries.find(
+        (country) => country.cca3 === border
+      );
+      return (
+        <button id="border-button" key={index}>
+          {borderCountry.name.common}
+        </button>
+      );
+    });
   }
 
   return (
     <div id={"country-detail-page"}>
       <h1>Country Detail page</h1>
-      {Array.isArray(country) && country.length > 0 ? (
-        <div>
-          <h2>{country[0].name.common}</h2>
-          <p>
-            <span>Native Name: </span>
-            {nativeNames}
-          </p>
-          <p>
-            <span>Population: </span>
-            {country[0].population.toLocaleString()}
-          </p>
-          <p>
-            <span>Region: </span>
-            {country[0].region}
-          </p>
-          <p>
-            <span>Sub Region: </span>
-            {country[0].subregion}
-          </p>
-          <p>
-            <span>Capital: </span>
-            {country[0].capital}
-          </p>
-          <p>
-            <span>Currencies: </span>
-            {currencyNames}
-          </p>
-          <p>
-            <span>Languages: </span>
-            {languageNames}
-          </p>
-          <p>
-            <span>Border Countries: </span>
-            {borderButtons}
-          </p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div>
+        <h2>{currentCountry.name.common}</h2>
+        <p>
+          <span>Native Name: </span>
+          {nativeNames}
+        </p>
+        <p>
+          <span>Population: </span>
+          {currentCountry.population.toLocaleString()}
+        </p>
+        <p>
+          <span>Region: </span>
+          {currentCountry.region}
+        </p>
+        <p>
+          <span>Sub Region: </span>
+          {currentCountry.subregion}
+        </p>
+        <p>
+          <span>Capital: </span>
+          {currentCountry.capital}
+        </p>
+        <p>
+          <span>Currencies: </span>
+          {currencyNames}
+        </p>
+        <p>
+          <span>Languages: </span>
+          {languageNames}
+        </p>
+        <p>
+          <span>Border Countries: </span>
+          {borderButtons.length > 0 ? borderButtons : "None"}
+        </p>
+      </div>
     </div>
   );
 }
