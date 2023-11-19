@@ -4,7 +4,7 @@
 
 :root {
   --element-background-color: hsl(0, 0%, 100%);
-  --primary-background-color: hsl(0, 0%, 98%);
+  --primary-background-color: hsl(0, 0%, 95%);
   --text-color: hsl(200, 15%, 8%);
 }
 
@@ -46,17 +46,18 @@ main {
 
 #search-filter-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 40px 0;
+  margin: 0 70px;
+  max-width: 1400;
 }
 
 #countries-wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 0 70px;
+  margin: 0 70px;
   max-width: 1400;
   flex-wrap: wrap;
-
-  /* overflow-x: auto; */
 }
 
 #country {
@@ -65,12 +66,15 @@ main {
   background-color: var(--element-background-color);
   padding-bottom: 30px;
   margin-bottom: 60px;
+  border-radius: 5px;
 }
 
 #country img {
   width: 100%;
   height: 55%;
   object-fit: fill;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 #country h2 {

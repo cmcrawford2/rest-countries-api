@@ -12,7 +12,7 @@ export default function Header() {
 
     if (newTheme === "light") {
       style.setProperty("--element-background-color", "hsl(0, 0%, 100%)");
-      style.setProperty("--primary-background-color", "hsl(0, 0%, 98%)");
+      style.setProperty("--primary-background-color", "hsl(0, 0%, 95%)");
       style.setProperty("--text-color", "hsl(200, 15%, 8%)");
     } else {
       style.setProperty("--element-background-color", "hsl(209, 23%, 22%)");

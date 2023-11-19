@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getCountries } from "../api.js";
 
 export default function Countries() {
@@ -21,22 +22,24 @@ export default function Countries() {
   console.log(countries);
 
   // Use the 'countries' state in the JSX once it's fetched
-  const countryDivs = countries.map((country, index) => (
-    <div id="country" key={index}>
-      <img src={country.flags.png} />
-      <h2>{country.name.common}</h2>
-      <p>
-        <span>Population: </span>
-        {country.population.toLocaleString()}
-      </p>
-      <p>
-        <span>Region: </span>
-        {country.region}
-      </p>
-      <p>
-        <span>Capital: </span>
-        {country.capital}
-      </p>
+  const countryDivs = countries.map((country) => (
+    <div id="country" key={country.cca3}>
+      <Link to={`/${country.cca3}`}>
+        <img src={country.flags.png} />
+        <h2>{country.name.common}</h2>
+        <p>
+          <span>Population: </span>
+          {country.population.toLocaleString()}
+        </p>
+        <p>
+          <span>Region: </span>
+          {country.region}
+        </p>
+        <p>
+          <span>Capital: </span>
+          {country.capital}
+        </p>
+      </Link>
     </div>
   ));
 
