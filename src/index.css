@@ -93,3 +93,15 @@ main {
 #country span {
   font-weight: 600;
 }
+
+#country-detail-page {
+  background-color: var(--primary-background-color);
+}
+
+#country-detail-page h1 {
+  margin: 0;
+}
+
+#country-detail-page p {
+  display: block;
+}

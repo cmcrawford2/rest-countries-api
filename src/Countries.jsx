@@ -22,26 +22,29 @@ export default function Countries() {
   console.log(countries);
 
   // Use the 'countries' state in the JSX once it's fetched
-  const countryDivs = countries.map((country) => (
-    <div id="country" key={country.cca3}>
-      <Link to={`/${country.cca3}`}>
-        <img src={country.flags.png} />{" "}
-      </Link>
-      <h2>{country.name.common}</h2>
-      <p>
-        <span>Population: </span>
-        {country.population.toLocaleString()}
-      </p>
-      <p>
-        <span>Region: </span>
-        {country.region}
-      </p>
-      <p>
-        <span>Capital: </span>
-        {country.capital}
-      </p>
-    </div>
-  ));
+  const countryDivs = countries.map((country) => {
+    return (
+      <div id="country" key={country.cca3}>
+        <Link to={`/${country.cca3}`}>
+          <img src={country.flags.png} />
+        </Link>
+        <h2>{country.name.common}</h2>
+
+        <p>
+          <span>Population: </span>
+          {country.population.toLocaleString()}
+        </p>
+        <p>
+          <span>Region: </span>
+          {country.region}
+        </p>
+        <p>
+          <span>Capital: </span>
+          {country.capital}
+        </p>
+      </div>
+    );
+  });
 
   return <div id="countries-wrapper">{countryDivs}</div>;
 }

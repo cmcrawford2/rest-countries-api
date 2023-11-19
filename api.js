@@ -8,3 +8,16 @@ export async function getCountries() {
     throw error;
   }
 }
+
+export async function getCountry(code) {
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/alpha/${code}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching country:", error);
+    throw error;
+  }
+}
