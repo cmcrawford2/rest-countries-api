@@ -25,21 +25,21 @@ export default function Countries() {
   const countryDivs = countries.map((country) => (
     <div id="country" key={country.cca3}>
       <Link to={`/${country.cca3}`}>
-        <img src={country.flags.png} />
-        <h2>{country.name.common}</h2>
-        <p>
-          <span>Population: </span>
-          {country.population.toLocaleString()}
-        </p>
-        <p>
-          <span>Region: </span>
-          {country.region}
-        </p>
-        <p>
-          <span>Capital: </span>
-          {country.capital}
-        </p>
+        <img src={country.flags.png} />{" "}
       </Link>
+      <h2>{country.name.common}</h2>
+      <p>
+        <span>Population: </span>
+        {country.population.toLocaleString()}
+      </p>
+      <p>
+        <span>Region: </span>
+        {country.region}
+      </p>
+      <p>
+        <span>Capital: </span>
+        {country.capital}
+      </p>
     </div>
   ));
 
