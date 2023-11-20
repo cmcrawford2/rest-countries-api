@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCountries } from "./CountriesContext";
@@ -18,12 +19,17 @@ export default function Countries() {
     };
 
     fetchData(); // Call the function to fetch data when the component mounts
-  }, [setCountries]); // Empty dependency array to run once on mount
+  }, []);
 
   console.log(countries);
 
   // Use the 'countries' state in the JSX once it's fetched
   const countryDivs = countries.map((country) => {
+    let capital = "None";
+    if (country.capital) {
+      capital = country.capital[0];
+    }
+
     return (
       <div id="country" key={country.cca3}>
         <Link to={`/${country.cca3}`}>
@@ -41,7 +47,7 @@ export default function Countries() {
         </p>
         <p>
           <span>Capital: </span>
-          {country.capital}
+          {capital}
         </p>
       </div>
     );

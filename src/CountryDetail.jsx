@@ -18,21 +18,44 @@ export default function CountryDetail() {
   console.log("Current Country = ", currentCountry);
 
   // Get the list of Native Names
-  const nativeNameObjects = Object.values(currentCountry.name.nativeName);
-  const nativeNames = nativeNameObjects
-    .map((nameObject) => nameObject.common)
-    .filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    })
-    .join(", ");
+  let nativeNames = "";
+  if (currentCountry.name.nativeName) {
+    const nativeNameObjects = Object.values(currentCountry.name.nativeName);
+    nativeNames = nativeNameObjects
+      .map((nameObject) => nameObject.common)
+      .filter((value, index, self) => {
+        return self.indexOf(value) === index;
+      })
+      .join(", ");
+  } else {
+    nativeNames = "None";
+  }
 
   // Get the list of currencies
-  const currencies = Object.values(currentCountry.currencies);
-  const currencyNames = currencies.map((currency) => currency.name).join(", ");
+  let currencyNames = "";
+  if (currentCountry.currencies) {
+    const currencies = Object.values(currentCountry.currencies);
+    currencyNames = currencies.map((currency) => currency.name).join(", ");
+  } else {
+    currencyNames = "None";
+  }
 
   // Get the list of languages
-  const languages = Object.values(currentCountry.languages);
-  const languageNames = languages.join(", ");
+  let languageNames = "";
+  if (currentCountry.languages) {
+    const languages = Object.values(currentCountry.languages);
+    languageNames = languages.join(", ");
+  } else {
+    languageNames = "None";
+  }
+
+  // Get the first capital in the list
+  let capital = "";
+  if (currentCountry.capital) {
+    capital = currentCountry.capital[0];
+  } else {
+    capital = "None";
+  }
 
   // Set up buttons for bordering countries
   let borderButtons = [];
@@ -69,11 +92,11 @@ export default function CountryDetail() {
         </p>
         <p>
           <span>Sub Region: </span>
-          {currentCountry.subregion}
+          {currentCountry.subregion ? currentCountry.subregion : "None"}
         </p>
         <p>
           <span>Capital: </span>
-          {currentCountry.capital}
+          {capital}
         </p>
         <p>
           <span>Currencies: </span>

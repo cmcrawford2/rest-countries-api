@@ -19,7 +19,7 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
-  height: 60px;
+  height: 68px;
   background-color: var(--element-background-color);
   align-items: center;
   padding: 0 70px;
@@ -50,6 +50,31 @@ main {
   padding: 40px 0;
   margin: 0 70px;
   max-width: 1400;
+}
+
+.search-container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  max-width: 500px; /* Set maximum width */
+  width: 500px;
+  height: 45px;
+  background-color: var(--element-background-color);
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+.search-input {
+  border: none;
+  background-color: var(--element-background-color);
+  color: var(--text-color);
+  font-size: 11px;
+  outline: none;
+}
+
+.search-icon {
+  font-size: 12px;
+  padding: 0 25px;
 }
 
 #countries-wrapper {
