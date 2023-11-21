@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCountries } from "./CountriesContext";
 
 export default function CountryDetail() {
@@ -10,6 +10,7 @@ export default function CountryDetail() {
   }
 
   const params = useParams();
+  const navigate = useNavigate();
   const countryCode = params.id;
 
   const currentCountry = countries.find(
@@ -66,7 +67,11 @@ export default function CountryDetail() {
         (country) => country.cca3 === border
       );
       return (
-        <button id="border-button" key={index}>
+        <button
+          id="border-button"
+          key={index}
+          onClick={() => navigate(`/${border}`)}
+        >
           {borderCountry.name.common}
         </button>
       );

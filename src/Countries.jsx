@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCountries } from "./CountriesContext";
 import { getCountries } from "../api.js";
 
-export default function Countries() {
+export default function Countries({ filter }) {
   const { countries, setCountries } = useCountries();
 
   useEffect(() => {
@@ -23,35 +24,39 @@ export default function Countries() {
 
   console.log(countries);
 
-  // Use the 'countries' state in the JSX once it's fetched
-  const countryDivs = countries.map((country) => {
-    let capital = "None";
-    if (country.capital) {
-      capital = country.capital[0];
-    }
+  const countryDivs = countries
+    .filter((country) => {
+      if (filter === "") return country;
+      else return country.region === filter;
+    })
+    .map((country) => {
+      let capital = "None";
+      if (country.capital) {
+        capital = country.capital[0];
+      }
 
-    return (
-      <div id="country" key={country.cca3}>
-        <Link to={`/${country.cca3}`}>
-          <img src={country.flags.png} />
-        </Link>
-        <h2>{country.name.common}</h2>
+      return (
+        <div id="country" key={country.cca3}>
+          <Link to={`/${country.cca3}`}>
+            <img src={country.flags.png} />
+          </Link>
+          <h2>{country.name.common}</h2>
 
-        <p>
-          <span>Population: </span>
-          {country.population.toLocaleString()}
-        </p>
-        <p>
-          <span>Region: </span>
-          {country.region}
-        </p>
-        <p>
-          <span>Capital: </span>
-          {capital}
-        </p>
-      </div>
-    );
-  });
+          <p>
+            <span>Population: </span>
+            {country.population.toLocaleString()}
+          </p>
+          <p>
+            <span>Region: </span>
+            {country.region}
+          </p>
+          <p>
+            <span>Capital: </span>
+            {capital}
+          </p>
+        </div>
+      );
+    });
 
   return <div id="countries-wrapper">{countryDivs}</div>;
 }
