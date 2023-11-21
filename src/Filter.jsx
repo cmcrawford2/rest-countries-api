@@ -16,11 +16,12 @@ export default function Filter({ onFilterChange }) {
 
   return (
     <div id="filter">
-      <label htmlFor="filterSelect">Filter:</label>
-      <select id="filterSelect" onChange={handleSelectChange}>
-        <option value="">Select a filter</option>
+      <select id="filter-select" onChange={handleSelectChange}>
+        <option className="filter-option" value="">
+          Filter by Region
+        </option>
         {uniqueRegions.map((region, index) => (
-          <option key={index} value={region}>
+          <option key={index} className="filter-option" value={region}>
             {region}
           </option>
         ))}

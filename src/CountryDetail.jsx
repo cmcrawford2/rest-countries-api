@@ -79,43 +79,58 @@ export default function CountryDetail() {
   }
 
   return (
-    <div id={"country-detail-page"}>
-      <h1>Country Detail page</h1>
-      <div>
-        <h2>{currentCountry.name.common}</h2>
-        <p>
-          <span>Native Name: </span>
-          {nativeNames}
-        </p>
-        <p>
-          <span>Population: </span>
-          {currentCountry.population.toLocaleString()}
-        </p>
-        <p>
-          <span>Region: </span>
-          {currentCountry.region}
-        </p>
-        <p>
-          <span>Sub Region: </span>
-          {currentCountry.subregion ? currentCountry.subregion : "None"}
-        </p>
-        <p>
-          <span>Capital: </span>
-          {capital}
-        </p>
-        <p>
-          <span>Currencies: </span>
-          {currencyNames}
-        </p>
-        <p>
-          <span>Languages: </span>
-          {languageNames}
-        </p>
-        <p>
-          <span>Border Countries: </span>
-          {borderButtons.length > 0 ? borderButtons : "None"}
-        </p>
+    <>
+      <div id="country-detail-button-area">
+        <button id="country-detail-back">
+          <i className="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
+        </button>
       </div>
-    </div>
+      <div id={"country-detail-page"}>
+        <div id="country-detail-img-wrapper">
+          <img src={currentCountry.flags.png} />
+        </div>
+        <div id="country-detail-info">
+          <h2>{currentCountry.name.common}</h2>
+          <div id="country-detail-info-wrapper">
+            <div className="country-detail-column">
+              <p>
+                <span>Native Name: </span>
+                {nativeNames}
+              </p>
+              <p>
+                <span>Population: </span>
+                {currentCountry.population.toLocaleString()}
+              </p>
+              <p>
+                <span>Region: </span>
+                {currentCountry.region}
+              </p>
+              <p>
+                <span>Sub Region: </span>
+                {currentCountry.subregion ? currentCountry.subregion : "None"}
+              </p>
+              <p>
+                <span>Capital: </span>
+                {capital}
+              </p>
+            </div>
+            <div className="country-detail-column">
+              <p>
+                <span>Currencies: </span>
+                {currencyNames}
+              </p>
+              <p>
+                <span>Languages: </span>
+                {languageNames}
+              </p>
+            </div>
+          </div>
+          <div id="country-detail-borders">
+            <span>Border Countries: </span>
+            {borderButtons.length > 0 ? borderButtons : "None"}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
