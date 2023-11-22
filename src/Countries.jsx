@@ -26,7 +26,7 @@ export default function Countries({ filter }) {
 
   const countryDivs = countries
     .filter((country) => {
-      if (filter === "") return country;
+      if (filter === "" || filter === "All") return country;
       else return country.region === filter;
     })
     .map((country) => {

@@ -7,6 +7,7 @@ export default function Home() {
   const [filter, setFilter] = useState("");
 
   function handleFilterChange(newFilter) {
+    console.log(newFilter);
     setFilter(newFilter);
   }
 

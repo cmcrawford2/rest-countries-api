@@ -1,17 +1,41 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getCountries } from "../api";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCountries } from "./CountriesContext";
 
 export default function CountryDetail() {
-  const { countries } = useCountries();
-  if (countries.length === 0) {
-    // We haven't loaded the countries yet.
-    return;
-  }
+  const { countries, setCountries } = useCountries();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if countries are already loaded to avoid unnecessary re-fetching
+    if (countries.length === 0) {
+      const fetchData = async () => {
+        try {
+          const data = await getCountries();
+          setCountries(data); // Update state with fetched data
+        } catch (error) {
+          // Handle errors if needed
+          console.error("Error fetching countries:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchData(); // Fetch countries if not loaded
+    } else {
+      setLoading(false);
+    }
+  }, [countries, setCountries]);
 
   const params = useParams();
   const navigate = useNavigate();
   const countryCode = params.id;
+
+  if (loading) {
+    return <div>Loading...</div>; // Render loading state while fetching countries
+  }
 
   const currentCountry = countries.find(
     (thisCountry) => thisCountry.cca3 === countryCode
@@ -81,9 +105,11 @@ export default function CountryDetail() {
   return (
     <>
       <div id="country-detail-button-area">
-        <button id="country-detail-back">
-          <i className="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
-        </button>
+        <Link to="/">
+          <button id="country-detail-back">
+            <i className="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
+          </button>
+        </Link>
       </div>
       <div id={"country-detail-page"}>
         <div id="country-detail-img-wrapper">
