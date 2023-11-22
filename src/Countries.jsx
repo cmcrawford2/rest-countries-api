@@ -22,8 +22,6 @@ export default function Countries({ filter }) {
     fetchData(); // Call the function to fetch data when the component mounts
   }, []);
 
-  console.log(countries);
-
   const countryDivs = countries
     .filter((country) => {
       if (filter === "" || filter === "All") return country;

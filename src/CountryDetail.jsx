@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from "react";
 import { getCountries } from "../api";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -40,10 +39,9 @@ export default function CountryDetail() {
   const currentCountry = countries.find(
     (thisCountry) => thisCountry.cca3 === countryCode
   );
-  console.log("Current Country = ", currentCountry);
 
   // Get the list of Native Names
-  let nativeNames = "";
+  let nativeNames = "None";
   if (currentCountry.name.nativeName) {
     const nativeNameObjects = Object.values(currentCountry.name.nativeName);
     nativeNames = nativeNameObjects
@@ -52,41 +50,32 @@ export default function CountryDetail() {
         return self.indexOf(value) === index;
       })
       .join(", ");
-  } else {
-    nativeNames = "None";
   }
 
   // Get the list of currencies
-  let currencyNames = "";
+  let currencyNames = "None";
   if (currentCountry.currencies) {
     const currencies = Object.values(currentCountry.currencies);
     currencyNames = currencies.map((currency) => currency.name).join(", ");
-  } else {
-    currencyNames = "None";
   }
 
   // Get the list of languages
-  let languageNames = "";
+  let languageNames = "None";
   if (currentCountry.languages) {
     const languages = Object.values(currentCountry.languages);
     languageNames = languages.join(", ");
-  } else {
-    languageNames = "None";
   }
 
   // Get the first capital in the list
-  let capital = "";
+  let capital = "None";
   if (currentCountry.capital) {
     capital = currentCountry.capital[0];
-  } else {
-    capital = "None";
   }
 
   // Set up buttons for bordering countries
   let borderButtons = [];
   if (currentCountry.borders && currentCountry.borders.length > 0) {
     borderButtons = currentCountry.borders.map((border, index) => {
-      console.log(border);
       const borderCountry = countries.find(
         (country) => country.cca3 === border
       );

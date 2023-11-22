@@ -143,8 +143,8 @@ i {
 }
 
 #country img {
-  width: 100%;
-  height: 55%;
+  width: 200px;
+  height: 120px;
   object-fit: fill;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -189,8 +189,9 @@ i {
   background-color: var(--primary-background-color);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 var(--left-right-margin);
+  height: 100vh;
 }
 
 #country-detail-img-wrapper {

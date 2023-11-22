@@ -27,7 +27,6 @@ export default function Search() {
 
     if (searchResults.length === 0) return;
 
-    console.log(searchResults[0].item);
     navigate(`/${searchResults[0].item.cca3}`);
   }
 
